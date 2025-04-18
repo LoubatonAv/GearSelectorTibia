@@ -111,6 +111,115 @@ const App = () => {
             newCurrentItemIndex[type] = 0;
           }
         }
+      } else if (calculationType === "balanced") {
+        // For balanced mode: First rank items based on offensive stats, then find best resistances among top tier
+
+        // Helper function to get offensive score
+        const getOffensiveScore = (item) => {
+          const stats = item.stats || {};
+
+          // Extract offensive stats based on vocation
+          let offensiveScore = 0;
+
+          // Get magic level for magic users
+          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
+            offensiveScore += parseFloat(stats["Magic Level"] || 0) * 10;
+          }
+
+          // Get distance skill for distance fighters
+          if (selectedVocation === "Paladin") {
+            offensiveScore += parseFloat(stats["Distance Fighting"] || 0) * 10;
+          }
+
+          // Get melee skills for knights
+          if (selectedVocation === "Knight") {
+            offensiveScore +=
+              Math.max(
+                parseFloat(stats["Sword Fighting"] || 0),
+                parseFloat(stats["Axe Fighting"] || 0),
+                parseFloat(stats["Club Fighting"] || 0)
+              ) * 10;
+          }
+
+          // Add general bonuses
+          offensiveScore += parseFloat(stats["Attack"] || 0) * 5;
+
+          // Consider special buffs/boosts
+          if (item.buffs) {
+            offensiveScore += Object.values(item.buffs).length * 8;
+          }
+
+          return offensiveScore;
+        };
+
+        // First pass: calculate offensive scores
+        const itemsWithOffensiveScores = itemsOfType.map((item) => ({
+          ...item,
+          offensiveScore: getOffensiveScore(item),
+        }));
+
+        // Sort by offensive score
+        const sortedByOffensive = [...itemsWithOffensiveScores].sort(
+          (a, b) => b.offensiveScore - a.offensiveScore
+        );
+
+        // Find top tier (top 25% of the offensive gear or at least top 3)
+        const topTierCount = Math.max(
+          3,
+          Math.ceil(sortedByOffensive.length * 0.25)
+        );
+        const topTierItems = sortedByOffensive.slice(0, topTierCount);
+
+        // Now calculate defensive scores for top tier items
+        const topTierWithDefensiveScores = topTierItems.map((item) => {
+          const armor = parseFloat(item.stats?.Arm) || 0;
+          const shield = parseFloat(item.shield) || 0;
+          let totalDamageReduction = 0;
+
+          for (const damageTypeName in damageTypes) {
+            const damageAmount = damageTypes[damageTypeName] || 0;
+            const resistanceKey = damageTypeName.toLowerCase();
+            const resistancePercent =
+              parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
+              0;
+
+            let damageAfterShield = Math.max(0, damageAmount - shield);
+            let damageReduction = damageAfterShield * (resistancePercent / 100);
+
+            if (damageTypeName === "Physical") {
+              const maxArmorReduction = Math.floor((5 * armor + 5) / 3);
+              damageReduction += maxArmorReduction;
+            }
+
+            totalDamageReduction += damageReduction;
+          }
+
+          // Combined score that heavily weights offensive but still considers defense
+          const combinedScore =
+            item.offensiveScore * 0.7 + totalDamageReduction * 0.3;
+
+          return {
+            ...item,
+            totalDamageReduction,
+            offensiveScore: item.offensiveScore,
+            score: combinedScore,
+          };
+        });
+
+        // Sort top tier by combined score
+        const finalRanked = topTierWithDefensiveScores.sort(
+          (a, b) => b.score - a.score
+        );
+
+        // Store the sorted items
+        if (finalRanked.length > 0) {
+          rankedByType[type] = finalRanked;
+
+          // Initialize current index if not already set
+          if (newCurrentItemIndex[type] === undefined) {
+            newCurrentItemIndex[type] = 0;
+          }
+        }
       }
     });
 
@@ -145,6 +254,33 @@ const App = () => {
         level={level}
         setLevel={setLevel}
       />
+
+      <div className="flex items-center justify-center space-x-4 mb-4">
+        <div className="flex items-center">
+          <input
+            type="radio"
+            id="defense"
+            name="calculationType"
+            value="defense"
+            checked={calculationType === "defense"}
+            onChange={() => setCalculationType("defense")}
+            className="mr-2"
+          />
+          <label htmlFor="defense">Best Def</label>
+        </div>
+        <div className="flex items-center">
+          <input
+            type="radio"
+            id="balanced"
+            name="calculationType"
+            value="balanced"
+            checked={calculationType === "balanced"}
+            onChange={() => setCalculationType("balanced")}
+            className="mr-2"
+          />
+          <label htmlFor="balanced">Balanced</label>
+        </div>
+      </div>
 
       <InputPanel
         textInput={textInput}

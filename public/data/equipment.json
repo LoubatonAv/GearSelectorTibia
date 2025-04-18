@@ -6352,20 +6352,7 @@
       "local_image": "/equipment-png/wands/eldritch_wand.png",
       "equipmentType": "wands"
     },
-    {
-      "name": "Energized Limb",
-      "level": 180,
-      "resistances": {
-        "energy": "+10%"
-      },
-      "imbueSlots": 2,
-      "buffs": {
-        "magic_level": 2
-      },
-      "image_url": "https://static.wikia.nocookie.net/tibia/images/a/a7/Energized_Limb.gif/revision/latest?cb=20181107123138&path-prefix=en",
-      "local_image": "/equipment-png/wands/energized_limb.png",
-      "equipmentType": "wands"
-    },
+    
     {
       "name": "Falcon Wand",
       "level": 300,

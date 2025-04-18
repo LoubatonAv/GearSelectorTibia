@@ -1,16 +1,27 @@
 export const parseDamageData = (text) => {
-    const damageTypes = {};
-    const lines = text.split("\n");
-  
-    lines.forEach((line) => {
-      const match = line.match(/(.*?)\s(\d+,\d{1,3})(.*?)%/);
+  const damageTypes = {};
+  const lines = text.split('\n');
+
+  let inDamageTypesSection = false;
+
+  for (let line of lines) {
+    if (line.toLowerCase().includes('damage types')) {
+      inDamageTypesSection = true;
+      continue;
+    }
+    if (line.toLowerCase().includes('damage sources')) {
+      break; // stop when Damage Sources section starts
+    }
+
+    if (inDamageTypesSection && line.trim()) {
+      const match = line.match(/^(.*?):\s([\d,]+)\s\(([\d.]+)%\)/);
       if (match) {
-        const damageType = match[1].trim();
-        const damageValue = parseFloat(match[2].replace(/,/g, ""));
-        damageTypes[damageType] = damageValue;
+        const type = match[1].trim();
+        const value = parseInt(match[2].replace(/,/g, ''), 10);
+        damageTypes[type] = value;
       }
-    });
-  
-    return damageTypes;
-  };
-  
+    }
+  }
+
+  return damageTypes;
+};

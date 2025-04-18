@@ -152,6 +152,7 @@ const App = () => {
     }));
   };
 
+  // blabla shceck
   const handleNextClick = (type) => {
     setCurrentItemIndex((prev) => ({
       ...prev,

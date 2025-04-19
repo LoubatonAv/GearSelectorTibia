@@ -14,7 +14,7 @@ export const parseDamageData = (text) => {
     }
 
     if (inDamageTypesSection && line.trim()) {
-      const match = line.match(/^(.*?):\s([\d,]+)\s\(([\d.]+)%\)/);
+      const match = line.match(/^\s*(.+?)\s+([\d,]+)\s\(([\d.]+)%\)/);
       if (match) {
         const type = match[1].trim();
         const value = parseInt(match[2].replace(/,/g, ''), 10);
@@ -23,5 +23,7 @@ export const parseDamageData = (text) => {
     }
   }
 
+  console.log('text:', text);
+  console.log('lines:', damageTypes);
   return damageTypes;
 };

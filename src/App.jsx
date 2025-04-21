@@ -28,10 +28,14 @@ const App = () => {
 
   const calculateBestEquipment = () => {
     const damageTypes = parseDamageData(textInput);
+    const totalDamage = Object.values(damageTypes).reduce(
+      (sum, val) => sum + val,
+      0
+    );
     const rankedByType = {};
     const newCurrentItemIndex = { ...currentItemIndex };
     const currentVocationLower = selectedVocation.toLowerCase();
-    const currentWeaponLower = selectedWeaponType.toLowerCase() + "s"; // Add 's' to match data format
+    const currentWeaponLower = selectedWeaponType.toLowerCase() + "s";
 
     const filteredEquipmentData = equipmentData.filter((item) => {
       const vocations = item.vocation?.toLowerCase().split(" and ");
@@ -40,34 +44,23 @@ const App = () => {
         vocations.some((v) => v.includes(currentVocationLower));
       const equipmentTypeLower = item.equipmentType?.toLowerCase();
 
-      // Check if the item is a weapon
       const isWeapon = ["swords", "axes", "clubs", "wands"].includes(
         equipmentTypeLower
       );
 
-      // Start with assumption that we should include this item
       let shouldInclude = true;
 
-      // Level check
       if (item.level && item.level > level) {
         shouldInclude = false;
-      }
-      // Vocation check
-      else if (!isAllowedForVocation) {
+      } else if (!isAllowedForVocation) {
         shouldInclude = false;
-      }
-      // Knight-specific weapon check
-      else if (currentVocationLower === "knight" && isWeapon) {
-        // Only include the selected weapon type for knights
-        // If no weapon type is selected yet, don't show any weapons
+      } else if (currentVocationLower === "knight" && isWeapon) {
         if (!currentWeaponLower) {
           shouldInclude = false;
         } else {
           shouldInclude = equipmentTypeLower === currentWeaponLower;
         }
-      }
-      // Wand check for non-sorcerers
-      else if (
+      } else if (
         equipmentTypeLower === "wand" &&
         currentVocationLower !== "sorcerer"
       ) {
@@ -90,21 +83,20 @@ const App = () => {
         const itemsWithScores = itemsOfType.map((item) => {
           const armor = parseFloat(item.stats?.Arm) || 0;
           const shield = parseFloat(item.shield) || 0;
-          let totalDamageReduction = 0;
+          let totalDamageReductionScore = armor * 2; // Give base armor a base weight
+
           for (const damageTypeName in damageTypes) {
             const damageAmount = damageTypes[damageTypeName] || 0;
             const resistanceKey = damageTypeName.toLowerCase();
             const resistancePercent =
               parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
               0;
-            let damageAfterShield = Math.max(0, damageAmount - shield);
-            let damageReduction = damageAfterShield * (resistancePercent / 100);
-            if (damageTypeName === "Physical") {
-              damageReduction += Math.floor((5 * armor + 5) / 3);
-            }
-            totalDamageReduction += damageReduction;
+            const damagePercentage =
+              totalDamage > 0 ? damageAmount / totalDamage : 0;
+            totalDamageReductionScore +=
+              resistancePercent * damagePercentage * 100; // Weight resistance by damage share
           }
-          return { ...item, score: totalDamageReduction };
+          return { ...item, score: totalDamageReductionScore };
         });
         const sortedItems = itemsWithScores.sort((a, b) => b.score - a.score);
         if (sortedItems.length > 0) {
@@ -114,63 +106,138 @@ const App = () => {
           }
         }
       } else if (calculationType === "balanced") {
-        const getOffensiveScore = (item) => {
+        const getWeaponScore = (item) => {
+          let score = 0;
           const stats = item.stats || {};
-          let offensiveScore = 0;
-          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid")
-            offensiveScore += parseFloat(stats["Magic Level"] || 0) * 10;
-          if (selectedVocation === "Paladin")
-            offensiveScore += parseFloat(stats["Distance Fighting"] || 0) * 10;
-          if (selectedVocation === "Knight") {
-            // Convert "swords" to "sword_fighting", etc.
+          const buffs = item.buffs || {};
+          const augments = item.augments || {};
+
+          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
+            score += parseFloat(stats["Magic Level"] || 0) * 100;
+          } else if (selectedVocation === "Paladin") {
+            score += parseFloat(stats["Distance Fighting"] || 0) * 100;
+          } else if (selectedVocation === "Knight") {
             const fightingSkill = item.equipmentType
               ?.toLowerCase()
               .replace(/s$/, "_fighting");
-            offensiveScore += parseFloat(stats[fightingSkill] || 0) * 10;
+            score += parseFloat(stats[fightingSkill] || 0) * 100;
           }
-          offensiveScore += parseFloat(stats["Attack"] || 0) * 5;
-          if (item.buffs)
-            offensiveScore += Object.values(item.buffs).length * 8;
-          return offensiveScore;
-        };
-        const itemsWithOffensiveScores = itemsOfType.map((item) => ({
-          ...item,
-          offensiveScore: getOffensiveScore(item),
-        }));
-        const sortedByOffensive = [...itemsWithOffensiveScores].sort(
-          (a, b) => b.offensiveScore - a.offensiveScore
-        );
-        const topTierCount = Math.max(
-          3,
-          Math.ceil(sortedByOffensive.length * 0.25)
-        );
-        const topTierItems = sortedByOffensive.slice(0, topTierCount);
-        const topTierWithDefensiveScores = topTierItems.map((item) => {
-          const armor = parseFloat(item.stats?.Arm) || 0;
-          const shield = parseFloat(item.shield) || 0;
-          let totalDamageReduction = 0;
+
+          const numBuffs = Object.keys(buffs).length;
+          const numAugments = Object.keys(augments).length;
+          score += (numBuffs + numAugments) * 50;
+
           for (const damageTypeName in damageTypes) {
-            const damageAmount = damageTypes[damageTypeName] || 0;
             const resistanceKey = damageTypeName.toLowerCase();
-            const resistancePercent =
+            const resistanceValue =
               parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
               0;
-            let damageAfterShield = Math.max(0, damageAmount - shield);
-            let damageReduction = damageAfterShield * (resistancePercent / 100);
-            if (damageTypeName === "Physical") {
-              damageReduction += Math.floor((5 * armor + 5) / 3);
-            }
-            totalDamageReduction += damageReduction;
+            score += resistanceValue * 10;
           }
-          const combinedScore =
-            item.offensiveScore * 0.7 + totalDamageReduction * 0.3;
-          return { ...item, score: combinedScore };
+
+          return score;
+        };
+
+        const getGenericScore = (item) => {
+          let score = 0;
+          const stats = item.stats || {};
+          const buffs = item.buffs || {};
+          const augments = item.augments || {};
+
+          const significantDamageTypes = Object.entries(damageTypes)
+            .sort(([, a], [, b]) => b - a)
+            .map(([type]) => type);
+
+          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
+            score += parseFloat(buffs.magic_level || 0) * 250;
+            score += parseFloat(stats["Magic Level"] || 0) * 75;
+          } else if (selectedVocation === "Paladin") {
+            score += parseFloat(buffs["distance_fighting"] || 0) * 250;
+            score += parseFloat(stats["Distance Fighting"] || 0) * 75;
+          } else if (selectedVocation === "Knight") {
+            const fightingSkillBuff = Object.keys(buffs).find((key) =>
+              ["axe_fighting", "sword_fighting", "club_fighting"].includes(key)
+            );
+            score += parseFloat(buffs[fightingSkillBuff] || 0) * 250;
+            const fightingSkillStat = item.equipmentType
+              ?.toLowerCase()
+              .replace(/s$/, "_fighting");
+            score += parseFloat(stats[fightingSkillStat] || 0) * 75;
+          }
+
+          score += parseFloat(stats["Arm"] || 0) * 5;
+
+          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
+            score += parseFloat(buffs.fire_magic_level || 0) * 15;
+            score += parseFloat(buffs.energy_magic_level || 0) * 15;
+            score += parseFloat(buffs.earth_magic_level || 0) * 15;
+            score += parseFloat(buffs.ice_magic_level || 0) * 15;
+            score += parseFloat(buffs.death_magic_level || 0) * 15;
+          }
+          const critChance = parseFloat(
+            String(buffs.critical_hit_chance || "0").replace("%", "")
+          );
+          const critDamage = parseFloat(
+            String(buffs.critical_extra_damage || "0").replace(/[^0-9.]/g, "")
+          );
+          score += ((critChance * critDamage) / 100) * 10;
+          if (selectedVocation === "Paladin" && buffs.perfect_shot) {
+            score +=
+              parseFloat(String(buffs.perfect_shot).replace(/[^0-9.]/g, "")) *
+              10;
+          }
+          score +=
+            parseFloat(
+              String(buffs.life_leech || "0").replace(/[^0-9.]/g, "")
+            ) * 8;
+          score +=
+            parseFloat(
+              String(buffs.mana_leech || "0").replace(/[^0-9.]/g, "")
+            ) * 12;
+
+          let augmentsScore = 0;
+          for (const spell in augments) {
+            const augmentValue = parseFloat(
+              String(augments[spell]).replace(/[^0-9.]/g, "")
+            );
+            let augmentWeight = 12;
+            if (
+              selectedVocation === "Sorcerer" ||
+              selectedVocation === "Druid"
+            ) {
+              augmentWeight = augments[spell].includes("damage") ? 18 : 10;
+            }
+            augmentsScore += augmentValue * augmentWeight;
+          }
+          score += augmentsScore;
+
+          let resistanceScore = 0;
+          for (const damageType of significantDamageTypes.slice(0, 3)) {
+            const resistanceKey = damageType.toLowerCase().replace(" ", "_");
+            const resistanceValue =
+              parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
+              0;
+            const damagePercentage =
+              totalDamage > 0 ? damageTypes[damageType] / totalDamage : 0;
+            resistanceScore += resistanceValue * (damagePercentage * 100);
+          }
+          score += resistanceScore * 0.7; // Slightly reduce weight of resistances in balanced
+
+          return score;
+        };
+
+        const itemsWithScores = itemsOfType.map((item) => {
+          if (item.equipmentType?.toLowerCase().includes("wand")) {
+            return { ...item, score: getWeaponScore(item) };
+          } else {
+            return { ...item, score: getGenericScore(item) };
+          }
         });
-        const finalRanked = topTierWithDefensiveScores.sort(
-          (a, b) => b.score - a.score
-        );
-        if (finalRanked.length > 0) {
-          rankedByType[type] = finalRanked;
+
+        const sortedItems = itemsWithScores.sort((a, b) => b.score - a.score);
+
+        if (sortedItems.length > 0) {
+          rankedByType[type] = sortedItems;
           if (newCurrentItemIndex[type] === undefined) {
             newCurrentItemIndex[type] = 0;
           }

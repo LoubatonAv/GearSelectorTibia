@@ -7,82 +7,126 @@ const EquipmentCard = ({
   totalItems,
   onPrevClick,
   onNextClick,
-}) => (
-  <div className="bg-gray-700 p-4 rounded-lg shadow-lg w-full mx-auto mb-4">
-    <div className="flex justify-between items-center mb-2">
-      <h2 className="text-lg font-semibold text-center">
-        Best {type.charAt(0).toUpperCase() + type.slice(1)}
-      </h2>
-      <div className="text-sm text-gray-300">
-        {index + 1} of {totalItems}
+  calculationType,
+}) => {
+  if (!item) return null;
+
+  const stats = item.stats || {};
+  const resistances = item.resistances || {};
+  const buffs = item.buffs || {};
+  const attributes = item.attributes || [];
+
+  const formatKey = (key) => {
+    return key
+      .replace(/_/g, " ")
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+  };
+
+  return (
+    <div className="bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col h-full">
+      <div className="flex justify-between items-center mb-3">
+        <h3 className="text-lg font-semibold text-gray-200">
+          {type.charAt(0).toUpperCase() + type.slice(1)}
+        </h3>
+        <div className="text-sm text-gray-400">
+          {index + 1} / {totalItems}
+        </div>
+      </div>
+
+      <div className="flex items-center mb-4">
+        {item.local_image && (
+          <img
+            src={item.local_image}
+            alt={item.name}
+            className="w-12 h-12 mr-4 object-contain bg-gray-700 p-1 rounded"
+          />
+        )}
+        <div className="overflow-hidden">
+          <h4 className="font-medium text-blue-300 truncate">{item.name}</h4>
+          {(item.level || item.lvl) && (
+            <p className="text-sm text-gray-400">
+              Level: {item.level || item.lvl}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Dynamic content section */}
+      <div className="flex flex-col flex-grow overflow-y-auto max-h-64 text-sm space-y-3">
+        {/* Attack */}
+        {(stats.Atk || item.atk) && (
+          <div className="bg-gray-700 px-2 py-1 rounded">
+            <span className="font-semibold text-gray-300">Atk:</span>{" "}
+            {stats.Atk || item.atk}
+          </div>
+        )}
+
+        {/* Attributes */}
+        {Array.isArray(attributes) && attributes.length > 0 && (
+          <div className="bg-gray-700 p-2 rounded">
+            <div className="font-semibold text-gray-300 mb-1">Attributes:</div>
+            <ul className="text-green-300 text-xs space-y-1">
+              {attributes.map((attr, idx) => (
+                <li key={idx}>
+                  {formatKey(attr.name)}: {attr.value}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Buffs */}
+        {Object.keys(buffs).length > 0 && (
+          <div>
+            <div className="font-semibold text-gray-300">Buffs:</div>
+            {Object.entries(buffs).map(([key, value]) => (
+              <div key={key} className="text-xs text-green-300">
+                {formatKey(key)}: {value}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Score always at bottom of card */}
+        {item.score !== undefined && (
+          <div className="mt-auto bg-gray-700 p-2 rounded">
+            <span className="font-semibold text-gray-300">Score:</span>{" "}
+            <span className="text-yellow-300">
+              {Math.round(item.score * 100) / 100}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* Navigation */}
+      <div className="flex justify-between mt-4 pt-2 border-t border-gray-700">
+        <button
+          onClick={onPrevClick}
+          disabled={index === 0}
+          className={`px-3 py-1 rounded text-sm ${
+            index === 0
+              ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
+        >
+          Prev
+        </button>
+        <button
+          onClick={onNextClick}
+          disabled={index === totalItems - 1}
+          className={`px-3 py-1 rounded text-sm ${
+            index === totalItems - 1
+              ? "bg-gray-700 text-gray-500 cursor-not-allowed"
+              : "bg-blue-600 hover:bg-blue-700 text-white"
+          }`}
+        >
+          Next
+        </button>
       </div>
     </div>
-
-    <h3 className="text-md font-medium text-center mb-3 text-blue-300">
-      {item.name}
-    </h3>
-
-    <div className="flex justify-center mb-3">
-      <img
-        className="w-20 h-20 object-contain"
-        src={item.local_image}
-        alt={item.name}
-      />
-    </div>
-
-    <ul className="mt-3 text-xs space-y-1">
-      {item.stats &&
-        Object.entries(item.stats).map(([k, v]) => (
-          <li key={k} className="bg-gray-800 p-1 rounded-md">
-            <span className="font-semibold">{k}:</span> {v}
-          </li>
-        ))}
-      {item.buffs &&
-        Object.entries(item.buffs).map(([k, v]) => (
-          <li key={k} className="bg-gray-800 p-1 rounded-md">
-            <span className="font-semibold">{k}:</span> {v}
-          </li>
-        ))}
-      {item.resistances &&
-        Object.entries(item.resistances).map(([k, v]) => (
-          <li key={k} className="bg-gray-800 p-1 rounded-md">
-            <span className="font-semibold">{k}:</span> {v}
-          </li>
-        ))}
-      {item.totalDamageReduction !== undefined && (
-        <li className="bg-blue-900 p-1 rounded-md">
-          <span className="font-semibold">Damage Reduction:</span>{" "}
-          {item.totalDamageReduction.toFixed(2)}
-        </li>
-      )}
-    </ul>
-
-    <div className="flex justify-between mt-4">
-      <button
-        className={`px-3 py-1 rounded-md ${
-          index > 0
-            ? "bg-blue-600 hover:bg-blue-700"
-            : "bg-gray-600 cursor-not-allowed"
-        }`}
-        onClick={onPrevClick}
-        disabled={index === 0}
-      >
-        ← Prev
-      </button>
-
-      <button
-        className={`px-3 py-1 rounded-md ${
-          index < totalItems - 1
-            ? "bg-blue-600 hover:bg-blue-700"
-            : "bg-gray-600 cursor-not-allowed"
-        }`}
-        onClick={onNextClick}
-        disabled={index === totalItems - 1}
-      >
-        Next →
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 export default EquipmentCard;

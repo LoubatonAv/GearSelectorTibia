@@ -16,6 +16,7 @@ const EquipmentSelector = ({
       <option value="Druid">Druid</option>
       <option value="Knight">Knight</option>
       <option value="Paladin">Paladin</option>
+      <option value="Monk">Monk</option>
     </select>
 
     <input

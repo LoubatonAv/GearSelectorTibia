@@ -63,19 +63,22 @@ const EquipmentCard = ({
           </div>
         )}
 
-        {/* Attributes */}
-        {Array.isArray(attributes) && attributes.length > 0 && (
-          <div className="bg-gray-700 p-2 rounded">
-            <div className="font-semibold text-gray-300 mb-1">Attributes:</div>
-            <ul className="text-green-300 text-xs space-y-1">
-              {attributes.map((attr, idx) => (
-                <li key={idx}>
-                  {formatKey(attr.name)}: {attr.value}
-                </li>
-              ))}
-            </ul>
+        {/* Defense */}
+        {/* Defense */}
+        {(stats.arm || item.def || item.arm) && (
+          <div className="bg-gray-700 px-2 py-1 rounded">
+            <span className="font-semibold text-gray-300">Def:</span>{" "}
+            {stats.arm || item.def || item.arm}
           </div>
         )}
+
+        <ul className="text-green-300 text-xs space-y-1">
+          {attributes.map((attr, idx) => (
+            <li key={idx}>
+              {formatKey(attr.name)}: {attr.value}
+            </li>
+          ))}
+        </ul>
 
         {/* Buffs */}
         {Object.keys(buffs).length > 0 && (
@@ -84,6 +87,17 @@ const EquipmentCard = ({
             {Object.entries(buffs).map(([key, value]) => (
               <div key={key} className="text-xs text-green-300">
                 {formatKey(key)}: {value}
+              </div>
+            ))}
+          </div>
+        )}
+        {/* Augments */}
+        {item.augments && Object.keys(item.augments).length > 0 && (
+          <div>
+            <div className="font-semibold text-gray-300">Augments:</div>
+            {Object.entries(item.augments).map(([key, value]) => (
+              <div key={key} className="text-xs text-purple-300">
+                {key}: {value}
               </div>
             ))}
           </div>

@@ -70,12 +70,33 @@ const App = () => {
       .then((data) => {
         const processedData = data.map((item) => {
           if (!item.stats) item.stats = {};
-          if (item.atk && !item.stats.Atk) item.stats.Atk = item.atk;
-          if (item.def && !item.stats.Arm) item.stats.Arm = item.def;
+          const armValue = item.arm || item.def;
+          if (armValue && !item.stats.Arm) item.stats.Arm = armValue;
 
           // Process attributes to always be a string
           if (!item.attributes || !Array.isArray(item.attributes)) {
             item.attributes = [];
+          }
+          // Parse attributes if it's a string (e.g. "fist fighting +1Augments: ...")
+          if (typeof item.attributes === "string") {
+            const parsedAttributes = [];
+
+            // Extract anything like: "fist fighting +1"
+            const basicAttrs = item.attributes.match(
+              /([\w\s]+?)\s*\+?([\d.%]+)/gi
+            );
+            if (basicAttrs) {
+              basicAttrs.forEach((attr) => {
+                const match = attr.match(/([\w\s]+?)\s*\+?([\d.%]+)/);
+                if (match) {
+                  const name = match[1].trim().toLowerCase().replace(/ /g, "_");
+                  const value = match[2].trim();
+                  parsedAttributes.push({ name, value });
+                }
+              });
+            }
+
+            item.attributes = parsedAttributes;
           }
 
           // Ensure buffs is an object (as discussed before)
@@ -185,7 +206,7 @@ const App = () => {
         druid: ["rods", "spellbooks"],
         knight: ["swords", "axes", "clubs", "spellbooks"],
         paladin: ["bows", "spellbooks"],
-        monk: ["fist fighting", "spellbooks"],
+        monk: ["fists", "spellbooks"],
       };
 
       const allowedTypes =
@@ -199,13 +220,36 @@ const App = () => {
           "swords",
           "axes",
           "clubs",
-          "fist fighting",
+          "fists",
           "spellbooks",
         ].includes(equipmentTypeLower);
 
       if (!isAllowedForVocation || !isEquipmentTypeAllowed) {
         shouldInclude = false;
       }
+
+      // 🔧 Prevent fist fighting for anyone except monks
+      if (equipmentTypeLower === "fists" && currentVocationLower !== "monk") {
+        shouldInclude = false;
+      }
+
+      // Filter based on specific weapon preference (e.g. Knight selected "Sword")
+      if (
+        selectedVocation === "Knight" &&
+        ["swords", "axes", "clubs", "fist fighting"].includes(
+          equipmentTypeLower
+        )
+      ) {
+        const selected = selectedWeaponType.toLowerCase();
+        if (selected && equipmentTypeLower !== selected + "s") {
+          shouldInclude = false;
+        }
+      }
+
+      setRankedEquipment(rankedByType);
+      setCurrentItemIndex(newCurrentItemIndex);
+
+      // ✅ Move this outside the filter loop — now ranking is complete
       const bestSet = Object.entries(rankedByType).map(
         ([type, items]) => items[0]
       );
@@ -225,24 +269,65 @@ const App = () => {
 
       if (calculationType === "defense") {
         const itemsWithScores = itemsOfType.map((item) => {
-          const armor =
-            parseFloat(item.stats?.Arm) || parseFloat(item.def) || 0;
-          const shield = parseFloat(item.shield) || 0;
-          let totalDamageReductionScore = armor * 2; // Give base armor a base weight
+          // First properly parse the armor value from wherever it might be
+          const armor = parseFloat(
+            item.stats?.Arm || item.arm || item.def || 0
+          );
+          const shield = parseFloat(item.shield || 0);
+          const resistances = item.resistances || {};
 
-          for (const damageTypeName in damageTypes) {
-            const damageAmount = damageTypes[damageTypeName] || 0;
-            const resistanceKey = damageTypeName.toLowerCase();
-            const resistancePercent =
-              parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
-              0;
-            const damagePercentage =
-              totalDamage > 0 ? damageAmount / totalDamage : 0;
-            totalDamageReductionScore +=
-              resistancePercent * damagePercentage * 100; // Weight resistance by damage share
+          // Simulate realistic reduction
+          let simulatedDamage = 0;
+
+          for (const [damageType, incomingDamage] of Object.entries(
+            damageTypes
+          )) {
+            let reducedDamage = incomingDamage;
+
+            // Check for resistance in a more flexible way
+            let resistancePercent = 0;
+            const damageTypeLower = damageType.toLowerCase();
+
+            // Try different keys that might hold the resistance value
+            if (resistances[damageTypeLower]) {
+              resistancePercent =
+                parseFloat(resistances[damageTypeLower].replace("%", "")) || 0;
+            } else if (resistances[damageTypeLower + "_resistance"]) {
+              resistancePercent =
+                parseFloat(
+                  resistances[damageTypeLower + "_resistance"].replace("%", "")
+                ) || 0;
+            }
+
+            if (resistancePercent > 0) {
+              reducedDamage = Math.floor(
+                ((100 - resistancePercent) / 100) * reducedDamage
+              );
+            }
+
+            // Apply armor reduction after resistances
+            const minArmorReduction = Math.floor((armor + shield) / 2);
+            const maxArmorReduction = minArmorReduction * 2 - 1;
+            const avgArmorReduction = Math.floor(
+              (minArmorReduction + maxArmorReduction) / 2
+            );
+            const finalDamage = Math.max(0, reducedDamage - avgArmorReduction);
+            simulatedDamage += finalDamage;
           }
-          return { ...item, score: totalDamageReductionScore };
+
+          // Use offensive stats as tiebreaker by adding a tiny fraction based on magic level or other offensive stats
+          let tiebreaker = 0;
+          if (item.attributes && Array.isArray(item.attributes)) {
+            for (const attr of item.attributes) {
+              if (attr.name === "magic_level") {
+                tiebreaker += parseFloat(attr.value) * 0.001; // Small enough to not override defense difference
+              }
+            }
+          }
+
+          return { ...item, score: -simulatedDamage + tiebreaker }; // Lower damage = better (higher score)
         });
+
         const sortedItems = itemsWithScores.sort((a, b) => b.score - a.score);
         if (sortedItems.length > 0) {
           rankedByType[type] = sortedItems;
@@ -308,87 +393,40 @@ const App = () => {
         const getGenericScore = (item) => {
           let score = 0;
           const stats = item.stats || {};
-          const buffs = item.buffs || {};
+          const attributes = item.attributes || [];
           const augments = item.augments || {};
-          const attributes = item.attributes || "";
 
           // Base stats
-          score += parseFloat(stats.Arm || item.def || 0) * 10;
+          score += parseFloat(stats.Arm || item.arm || item.def || 0) * 20;
           score += parseFloat(stats.Atk || item.atk || 0) * 20;
 
-          // Extract skill bonuses from attributes
-          if (selectedVocation === "Knight") {
-            score += extractSkillBonus(attributes, "sword fighting") * 75;
-            score += extractSkillBonus(attributes, "axe fighting") * 75;
-            score += extractSkillBonus(attributes, "club fighting") * 75;
-            score += extractSkillBonus(attributes, "fist fighting") * 75;
-          } else if (selectedVocation === "Paladin") {
-            score += extractSkillBonus(attributes, "distance fighting") * 75;
-          } else {
-            score += extractSkillBonus(attributes, "magic level") * 75;
-          }
-
-          // Check for critical hit bonuses
-          const critBonus = extractCriticalHitBonus(attributes);
-          score += ((critBonus.chance * critBonus.damage) / 100) * 15;
-
-          // Check for leech bonuses
-          if (attributes.includes("life leech")) {
-            const lifeLeechMatch = attributes.match(/life leech\s*\((\d+)%\)/i);
-            if (lifeLeechMatch && lifeLeechMatch[1]) {
-              score += parseInt(lifeLeechMatch[1], 10) * 8;
-            }
-          }
-
-          if (attributes.includes("mana leech")) {
-            const manaLeechMatch = attributes.match(/mana leech\s*\((\d+)%\)/i);
-            if (manaLeechMatch && manaLeechMatch[1]) {
-              score += parseInt(manaLeechMatch[1], 10) * 12;
-            }
-          }
-
-          // Check for augments
-          if (attributes.includes("Augments:")) {
-            score += 50; // Base bonus for having augments
-
-            // Try to extract augment damage bonus
-            const augmentMatch = attributes.match(
-              /\+(\d+)%\s*(?:base)?\s*damage/i
-            );
-            if (augmentMatch && augmentMatch[1]) {
-              score += parseInt(augmentMatch[1], 10) * 8;
-            }
-          }
-
-          // Score from buffs
+          // Extract skill bonuses from attributes properly
           if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
-            score += parseFloat(buffs.magic_level || 0) * 250;
+            score += extractSkillBonus(attributes, "magic_level") * 100;
           } else if (selectedVocation === "Paladin") {
-            score += parseFloat(buffs.distance_fighting || 0) * 250;
+            score += extractSkillBonus(attributes, "distance_fighting") * 100;
           } else if (selectedVocation === "Knight") {
-            const fightingSkillBuff = Object.keys(buffs).find((key) =>
-              [
-                "axe_fighting",
-                "sword_fighting",
-                "club_fighting",
-                "fist_fighting",
-              ].includes(key)
-            );
-            score += parseFloat(buffs[fightingSkillBuff] || 0) * 250;
+            score += extractSkillBonus(attributes, "sword_fighting") * 100;
+            score += extractSkillBonus(attributes, "axe_fighting") * 100;
+            score += extractSkillBonus(attributes, "club_fighting") * 100;
+            score += extractSkillBonus(attributes, "fist_fighting") * 100;
           }
 
-          // Add resistance scoring
-          let resistanceScore = 0;
-          for (const damageType in damageTypes) {
-            const resistanceKey = damageType.toLowerCase().replace(" ", "_");
-            const resistanceValue =
-              parseFloat(item.resistances?.[resistanceKey]?.replace("%", "")) ||
-              0;
-            const damagePercentage =
-              totalDamage > 0 ? damageTypes[damageType] / totalDamage : 0;
-            resistanceScore += resistanceValue * (damagePercentage * 100);
-          }
-          score += resistanceScore * 0.7;
+          // Properly evaluate augments
+          Object.entries(augments || {}).forEach(([spellName, effect]) => {
+            const critMatch = effect.match(
+              /\+(\d+)%\s*critical\s*extra\s*damage/i
+            );
+            if (critMatch) {
+              score += parseInt(critMatch[1], 10) * 15; // Use the BALANCED_WEIGHTS.critical_extra_damage value
+            }
+          });
+
+          // Add resistance scoring - make sure to handle all resistance types correctly
+          Object.entries(item.resistances || {}).forEach(([type, value]) => {
+            const numValue = parseFloat(value.replace("%", "")) || 0;
+            score += numValue * (BALANCED_WEIGHTS.resistance || 2);
+          });
 
           return score;
         };

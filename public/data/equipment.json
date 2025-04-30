@@ -23514,6 +23514,1362 @@
     "dropped_by": "Draken Warmaster\nEternal Guardian\nEthershreck\nGhastly Dragon\nHatebreeder\nLizard Legionnaire\nWailing Widow\nZulazza the Corruptor",
     "equipmentType": "axes",
     "local_image": "/equipment-png/axes/zaoan_halberd.png"
+  },
+  {
+    "name": "Alicorn Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/alicorn_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.85,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 1
+      },
+      {
+        "name": "holy_magic_level",
+        "value": 1
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "paladins",
+    "vocation": "paladins",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Arboreal Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/arboreal_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.7,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 2
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "druids",
+    "vocation": "druids",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Arcanomancer Sigil",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/arcanomancer_sigil.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 1
+      },
+      {
+        "name": "fire_magic_level",
+        "value": 1
+      },
+      {
+        "name": "energy_magic_level",
+        "value": 1
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "sorcerers",
+    "vocation": "sorcerers",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Axe Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/axe_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "axe_fighting",
+        "value": "+4"
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Arachnophobica\nDwarf Guard\nDwarf Soldier\nEnslaved Dwarf\nMadareth\nMemory of a Dwarf\nPlaguesmith",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Blister Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/blister_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "duration": "",
+    "charges": "",
+    "required_level": 220,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Brandon's Wedding Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/brandon_s_wedding_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Broken Ring of Ending",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/broken_ring_of_ending.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.6,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Yielothax",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Broken Wedding Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/broken_wedding_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.4,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Butterfly Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/butterfly_ring.png",
+    "header_2": "",
+    "arm": "2",
+    "weight": 1.2,
+    "resistances": {
+      "death": "+3%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 50,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Dark Carnisylvan\nLavaworm\nMercurial Menace\nNymph\nPixie\nSwan Maiden\nUndertaker",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "death_resistance",
+        "value": "+3%"
+      }
+    ]
+  },
+  {
+    "name": "Charged Alicorn Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/charged_alicorn_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.85,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 1
+      },
+      {
+        "name": "holy_magic_level",
+        "value": 1
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "death_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "holy_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%",
+      "holy": "+4%",
+      "death": "+4%"
+    },
+    "duration": "3 hours",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "paladins",
+    "vocation": "paladins",
+    "dropped_by": "Plunder Patriarch",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Charged Arboreal Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/charged_arboreal_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.7,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 2
+      },
+      {
+        "name": "mana_leech",
+        "value": "+1%"
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "3 hours",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "druids",
+    "vocation": "druids",
+    "dropped_by": "Plunder Patriarch",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Charged Arcanomancer Sigil",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/charged_arcanomancer_sigil.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 2
+      },
+      {
+        "name": "fire_magic_level",
+        "value": 1
+      },
+      {
+        "name": "energy_magic_level",
+        "value": 1
+      },
+      {
+        "name": "mana_leech",
+        "value": "+1%"
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "3 hours",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "sorcerers",
+    "vocation": "sorcerers",
+    "dropped_by": "Plunder Patriarch",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Charged Ethereal Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/charged_ethereal_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 2
+      },
+      {
+        "name": "life_leech",
+        "value": "+2%"
+      },
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+4%"
+      }
+    ],
+    "resistances": {
+      "physical": "+4%",
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "3 hours",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "monks",
+    "vocation": "monks",
+    "dropped_by": "Magma Bubble\nPlunder Patriarch",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Charged Spiritthorn Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/charged_spiritthorn_ring.png",
+    "header_2": "",
+    "arm": "2",
+    "weight": 0.95,
+    "attributes": [
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+8%"
+      }
+    ],
+    "resistances": {
+      "physical": "+8%",
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "3 hours",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "knights",
+    "vocation": "knights",
+    "dropped_by": "Plunder Patriarch",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Claw of 'The Noxious Spawn'",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/claw_of__the_noxious_spawn_.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 5,
+    "duration": "",
+    "charges": "",
+    "required_level": 100,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "The Noxious Spawn",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Club Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/club_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "club_fighting",
+        "value": "+4"
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Cursed Ape\nCustodian\nCyclops\nCyclops Drone\nCyclops Smith\nDepowered Minotaur\nFrost Giant\nFrost Giantess\nGang Member\nGargoyle\nGorger Inferniarch\nHairman the Huge\nInsectoid Scout\nKongra\nMadareth\nMemory of an Ogre\nOgre Brute\nPlaguesmith\nWar Golem",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Crystal Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/crystal_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Animated Mummy\nBanshee\nBoar Man\nCrystal Spider\nElder Mummy\nEnergy Elemental\nFerumbras\nFrost Flower Asura\nFury\nFuryosa\nGhazbaran\nGrorlam\nHigh Voltage Elemental\nKnowledge Elemental\nKusuma\nMahatheb\nMantosaurus\nMemory of a Banshee\nMidnight Asura\nMorgaroth\nMummy\nNaga Archer\nNightstalker\nOrshabaal\nRaging Mage\nStone Golem\nThe Blazing Rose\nThe Diamond Blossom\nThe Flaming Orchid\nThe Winter Bloom\nTrue Frost Flower Asura\nTrue Midnight Asura\nVashresamun\nWarlock\nIks Chuka",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Death Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/death_ring.png",
+    "header_2": "",
+    "arm": "1",
+    "weight": 0.8,
+    "resistances": {
+      "death": "+5%"
+    },
+    "duration": "7.5 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Arachnophobica\nBetrayed Wraith\nBlightwalker\nBretzecutioner\nBurning Book\nDark Torturer\nDawnfire Asura\nDefiler\nDestroyer\nDiabolic Imp\nDracola\nFleshslicer\nFury\nFuryosa\nGhazbaran\nGolgordan\nGrave Guard\nGravedigger\nGrim Reaper\nHand of Cursed Fate\nHaunted Dragon\nLatrivan\nLoricate Orger\nLost Soul\nMadareth\nMorgaroth\nNightmare\nNightmare Scion\nOmnivora\nOrshabaal\nPhantasm\nRagiaz\nShulgrax\nSouleater\nSpectre\nSpidris\nSpidris Elite\nThe Abomination\nThe Flaming Orchid\nThe Handmaiden\nTormentor\nTrue Dawnfire Asura\nUndead Dragon\nUshuriel\nXogixath\nZanakeph\nZorvorax",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "death_resistance",
+        "value": "+5%"
+      }
+    ]
+  },
+  {
+    "name": "Dwarven Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/dwarven_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1.1,
+    "duration": "60 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Amenef the Burning\nCrazed Beggar\nCrazed Dwarf\nDrillworm\nDwarf\nDwarf Geomancer\nDwarf Miner\nGore Horn\nGozzler\nHaunted Treeling\nLavafungus\nLost Basher\nLost Berserker\nLost Exile\nLost Husher\nMadareth\nMassive Earth Elemental\nMindmasher\nNovice of the Cult\nOrewalker\nSister Hetai\nStone Devourer\nWar Golem",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Enchanted Blister Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/enchanted_blister_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "resistances": {
+      "fire": "+6%"
+    },
+    "duration": "60 minutes",
+    "charges": "",
+    "required_level": 220,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Bragrumol\nMozradek\nUrmahlullu the Weakened\nXogixath",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "fire_resistance",
+        "value": "+6%"
+      }
+    ]
+  },
+  {
+    "name": "Energy Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/energy_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "10 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "knights, paladins and monks",
+    "vocation": "knights, paladins and monks",
+    "dropped_by": "Animated Feather\nArachnophobica\nAskarak Demon\nAskarak Lord\nBellicose Orger\nBruise Payne\nChoking Fear\nDemodras\nDipthrah\nDragon Lord\nEnergy Elemental\nEnlightened of the Cult\nFerumbras\nFrost Dragon\nGelidrazah the Frozen\nGhazbaran\nGolgordan\nHand of Cursed Fate\nHigh Voltage Elemental\nInfernalist\nKnowledge Elemental\nLatrivan\nMagma Crawler\nMamma Longlegs\nMassive Water Elemental\nMazoran\nMetal Gargoyle\nMorgaroth\nMutated Bat\nOrshabaal\nRenegade Quara Mantassin\nSerpent Spawn\nShaburak Demon\nShaburak Lord\nTarbaz\nThe Handmaiden\nThe Old Widow\nTwisted Shaper\nTzumrah the Dazzler\nUshuriel\nVexclaw\nWarlock\nWater Elemental",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Engraved Wedding Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/engraved_wedding_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.4,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ethereal Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ethereal_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "resistances": {
+      "physical": "+1%",
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "monks",
+    "vocation": "monks",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+1%"
+      }
+    ]
+  },
+  {
+    "name": "Family Signet Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/family_signet_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Frozen Claw",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/frozen_claw.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 4.55,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "The Percht Queen",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Gold Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/gold_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Angry Demon\nBlightwalker\nCave Chimera\nCourage Leech\nDark Carnisylvan\nDemon\nFerumbras\nGhazbaran\nGolden Servant\nGolden Servant Replica\nGolgordan\nHarpy\nKatex Blood Tongue\nLatrivan\nMisguided Thief\nMorgaroth\nOrshabaal\nUshuriel\nYirkas Blue Scales\nMantosaurus",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Horn (Ring)",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/horn__ring_.png",
+    "header_2": "",
+    "arm": "1",
+    "weight": 1.2,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "White Pale",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "House Silversun's Signet Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/house_silversun_s_signet_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 4.5,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Life Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/life_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "20 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Acolyte of the Cult\nArachnophobica\nBarbarian Headsplitter\nBarbarian Skullhunter\nChoking Fear\nDeathling Scout\nDeathling Spellsinger\nDeepling Elite\nDeepling Master Librarian\nDeepling Scout\nDeepling Spellsinger\nDeepling Warrior\nDeepworm\nFlamecaller Zazrak\nGaz'haragoth\nGhost of a Planegazer\nGhoul\nGroam\nLizard Dragon Priest\nLizard Snakecharmer\nMadareth\nMahrdis\nMassive Water Elemental\nMetal Gargoyle\nMidnight Panther\nMutated Tiger\nNeutral Deepling Warrior\nOmnivora\nRenegade Quara Hydromancer\nRot Elemental\nSerpent Spawn\nThe Lord of the Lice\nThe Noxious Spawn\nThe Snapper\nUndead Prospector\nWater Elemental\nWhite Pale\nYakchal\nZomba\nZombie\nZushuka",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Lion Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/lion_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.4,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Might Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/might_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1,
+    "resistances": {
+      "physical": "+20%",
+      "fire": "+20%",
+      "earth": "+20%",
+      "energy": "+20%",
+      "ice": "+20%",
+      "holy": "+20%",
+      "death": "+20%"
+    },
+    "duration": "",
+    "charges": "20",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Angry Demon\nAshmunrah\nBrain Squid\nCult Believer\nCult Enforcer\nCult Scholar\nDemon\nDemon Outcast\nDiamond Servant\nDiamond Servant Replica\nEnergetic Book\nEnerguardian of Tales\nGhazbaran\nGolgordan\nHero\nKnowledge Elemental\nLatrivan\nMemory of a Hero\nMorgaroth\nOrshabaal\nRage Squid\nRoaring Lion\nSight of Surrender\nUshuriel\nVexclaw\nVicious Squire\nWorker Golem\nYielothax\nZarabustor",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "fire_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "death_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "holy_resistance",
+        "value": "+20%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+20%"
+      }
+    ]
+  },
+  {
+    "name": "Power Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/power_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "attributes": [
+      {
+        "name": "fist_fighting",
+        "value": "+6"
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Arachnophobica\nCursed Ape\nDark Monk\nFernfang\nGrorlam\nHairman the Huge\nKongra\nMemory of an Ogre\nMonk (Creature)\nMuseum Stone Golem\nOgre Brute\nStone Golem\nThe Handmaiden",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Prismatic Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/prismatic_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1.05,
+    "resistances": {
+      "physical": "+10%",
+      "energy": "+8%"
+    },
+    "duration": "60 minutes",
+    "charges": "",
+    "required_level": 120,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "energy_resistance",
+        "value": "+8%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+10%"
+      }
+    ]
+  },
+  {
+    "name": "Ring of Blue Plasma",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_blue_plasma.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 1
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 100,
+    "required_vocation": "paladins",
+    "vocation": "paladins",
+    "dropped_by": "Ahau\nAlptramun\nAmenef the Burning\nAnomaly\nArachnophobica\nBrain Squid\nBreach Brood\nBurster\nCapricious Phantom\nCave Chimera\nCount Vlarkorth\nCrazed Summer Rearguard\nDistorted Phantom\nDread Intruder\nDuke Krule\nEarl Osam\nEradicator\nEssence of Malice\nFreakish Lost Soul\nGuard Captain Quaid\nIzcandar Champion of Summer\nIzcandar Champion of Winter\nIzcandar the Banished\nKing Zelos\nLord Azaram\nMalofur Mangrinder\nMaxxenius\nMould Phantom\nOutburst\nPaladin's Apparition\nPirat Bombardier\nPlagueroot\nReality Reaver\nRealityquake\nRupture\nSir Baeloc\nSorcerer's Apparition\nSoul-Broken Harbinger\nSparkion\nThe Nightmare Beast\nThe Scourge of Oblivion\nThe Unarmored Voidborn\nUsurper Commander\nVenerable Girtablilu\nVibrant Phantom\nWorld Devourer\nDreadful Disruptor",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Ending",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_ending.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0,
+    "duration": "",
+    "charges": "",
+    "required_level": 200,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Green Plasma",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_green_plasma.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 2
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 100,
+    "required_vocation": "sorcerers and druids",
+    "vocation": "sorcerers and druids",
+    "dropped_by": "Ahau\nAlptramun\nAnomaly\nBrachiodemon\nBrain Squid\nBreach Brood\nBurster\nCount Vlarkorth\nDistorted Phantom\nDread Intruder\nDreadful Disruptor\nDuke Krule\nEarl Osam\nEradicator\nEssence of Malice\nIzcandar Champion of Summer\nIzcandar Champion of Winter\nIzcandar the Banished\nKatex Blood Tongue\nKing Zelos\nLord Azaram\nMalofur Mangrinder\nMaxxenius\nOutburst\nPlagueroot\nReality Reaver\nRealityquake\nRupture\nSir Baeloc\nSister Hetai\nSorcerer's Apparition\nSparkion\nSrezz Yellow Eyes\nThe Nightmare Beast\nThe Scourge of Oblivion\nThe Unarmored Voidborn\nUtua Stone Sting\nWorld Devourer\nYirkas Blue Scales",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Healing",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_healing.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "7.5 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Ancient Spawn of Morgathla\nAngry Demon\nAnimated Moohtant\nAnnihilon\nArachir the Ancient One\nArachnophobica\nArthei\nBanshee\nBoreth\nBrinebrute Inferniarch\nBroken Shaper\nChoking Fear\nCrustacea Gigantica\nDeath Priest\nDemon\nDemon Outcast\nDiblis the Fair\nDracola\nEsmeralda\nGaffir\nGhazbaran\nGlooth Bomb\nGolgordan\nGravelord Oshuran\nHydra\nKollos\nLady Tenebris\nLatrivan\nLersatio\nLich\nLloyd\nMadareth\nMarziel\nMemory of a Dwarf\nMinotaur Amazon\nMinotaur Cult Follower\nMinotaur Cult Prophet\nMoohtant\nMoohtant Wallbreaker\nMorgaroth\nNightfiend\nOmrafir\nOrshabaal\nOvercharged Energy Element\nPlagirath\nPrince Drazzak\nQuara Hydromancer\nQuara Hydromancer Scout\nRagiaz\nRahemos\nRenegade Quara Constrictor\nRenegade Quara Hydromancer\nSea Serpent\nShadowpelt\nShaper Matriarch\nSharpclaw\nSir Valorcrest\nSister Hetai\nThe Blazing Time Guardian\nThe Enraged Thorn Knight\nThe Freezing Time Guardian\nThe Pale Count\nThe Sandking\nThe Time Guardian\nTremor Worm\nUshuriel\nVexclaw\nWerebadger\nWerefox\nZamulosh\nZevelon Duskbringer",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Orange Plasma",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_orange_plasma.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "magic_level",
+        "value": 1
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+2%"
+      }
+    ],
+    "resistances": {
+      "physical": "+2%"
+    },
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 100,
+    "required_vocation": "monks",
+    "vocation": "monks",
+    "dropped_by": "Barbarian Skullhunter\nBrain Squid\nBreach Brood\nBurster\nDread Intruder\nFeral Werecrocodile\nIks Pututu\nMonk's Apparition\nReality Reaver\nSorcerer's Apparition\nSparkion\nWhite Weretiger",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Red Plasma",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_red_plasma.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "physical_resistance",
+        "value": "+3%"
+      }
+    ],
+    "resistances": {
+      "physical": "+3%"
+    },
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 100,
+    "required_vocation": "knights",
+    "vocation": "knights",
+    "dropped_by": "Ahau\nAlptramun\nAnomaly\nBrain Squid\nBreach Brood\nBurster\nCobra Scout\nCount Vlarkorth\nDistorted Phantom\nDread Intruder\nDreadful Disruptor\nDuke Krule\nEarl Osam\nEradicator\nEssence of Malice\nIzcandar Champion of Summer\nIzcandar Champion of Winter\nIzcandar the Banished\nKing Zelos\nLord Azaram\nMalofur Mangrinder\nMany Faces\nMaxxenius\nNeferi the Spy\nOutburst\nPlagueroot\nReality Reaver\nRealityquake\nRupture\nSir Baeloc\nSorcerer's Apparition\nSparkion\nSulphur Spouter\nThe Last Lore Keeper\nThe Nightmare Beast\nThe Scourge of Oblivion\nThe Source of Corruption\nThe Unarmored Voidborn\nUsurper Commander\nWorld Devourer",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Secret Thoughts (Charged)",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_secret_thoughts__charged_.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Secret Thoughts",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_secret_thoughts.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Urmahlullu the Weakened",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Souls (Depleted)",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_souls__depleted_.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "",
+    "charges": "",
+    "required_level": 200,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Souls",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_souls.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "resistances": {
+      "physical": "+2%"
+    },
+    "duration": "2 hours",
+    "charges": "",
+    "required_level": 200,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Brain Head\nThe Pale Worm",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "physical_resistance",
+        "value": "+2%"
+      }
+    ]
+  },
+  {
+    "name": "Ring of Temptation",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_temptation.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "",
+    "charges": "200",
+    "required_level": 100,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Sugar Daddy",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of Wishes",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_wishes.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.5,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Ring of the Sky",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/ring_of_the_sky.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.4,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Alptramun\nCrape Man\nDraken Spellweaver\nDraken Warmaster\nGhazbaran\nIzcandar Champion of Summer\nIzcandar Champion of Winter\nIzcandar the Banished\nLady Tenebris\nMad Mage\nMalofur Mangrinder\nMaxxenius\nMorgaroth\nOrshabaal\nPlagueroot\nRaging Mage\nThe Nightmare Beast\nThe Scourge of Oblivion\nWarlock\nZarabustor",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Shapeshifter Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/shapeshifter_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "10 hours",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Spiritthorn Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/spiritthorn_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.95,
+    "resistances": {
+      "physical": "+2%",
+      "fire": "+4%",
+      "earth": "+4%",
+      "energy": "+4%",
+      "ice": "+4%"
+    },
+    "duration": "",
+    "charges": "",
+    "required_level": 400,
+    "required_vocation": "knights",
+    "vocation": "knights",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings",
+    "attributes": [
+      {
+        "name": "fire_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "ice_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "energy_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "earth_resistance",
+        "value": "+4%"
+      },
+      {
+        "name": "physical_resistance",
+        "value": "+2%"
+      }
+    ]
+  },
+  {
+    "name": "Star Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/star_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "10 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "without",
+    "vocation": "without",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Stealth Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/stealth_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1,
+    "duration": "10 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Angry Demon\nAnnihilon\nAskarak Prince\nBibby Bloodbath\nBlack Vixen\nBrimstone Bug\nBurning Book\nCaptain Jones\nCave Devourer\nCountess Sorrow\nDemon\nDemon Outcast\nDiabolic Imp\nEnfeebled Silencer\nGhazbaran\nGhost\nGolden Servant\nGolden Servant Replica\nGolgordan\nLatrivan\nMad Mage\nMamma Longlegs\nMinotaur Hunter\nMorgaroth\nMutated Rat\nNeferi the Spy\nOmruc\nOrc Warlord\nOrshabaal\nPhantasm\nPirate Ghost\nPooka\nQuara Mantassin\nQuara Mantassin Scout\nRaging Mage\nReflection of a Mage\nRenegade Quara Mantassin\nSea Serpent\nShaburak Prince\nSilencer\nSpectre\nSulphur Scuttler\nTarnished Spirit\nThalas\nThe Handmaiden\nThe Horned Fox\nThe Old Widow\nThe Pale Count\nTroll Legionnaire\nTwisted Pooka\nUndead Elite Gladiator\nUndead Gladiator\nUshuriel\nYoung Sea Serpent\nZamulosh",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Suspicious Signet Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/suspicious_signet_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.8,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Sweetheart Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/sweetheart_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Sword Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/sword_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "sword_fighting",
+        "value": "+4"
+      }
+    ],
+    "duration": "30 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Arachnophobica\nDamaged Worker Golem\nMadareth\nMooh'Tah Warrior\nOrc Cult Fanatic\nOrc Leader\nRenegade Orc\nSir Valorcrest\nVulcongra\nWerehyaena Shaman",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Symbol of Sun and Sea",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/symbol_of_sun_and_sea.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 1,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Time Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/time_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.9,
+    "attributes": [
+      {
+        "name": "speed",
+        "value": "+30"
+      }
+    ],
+    "duration": "10 minutes",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Adept of the Cult\nArmadile\nChizzoron the Distorter\nCrystal Spider\nDarkfang\nGiant Spider\nGorger Inferniarch\nHemming\nHide\nLucifuga Aranea\nMadareth\nMamma Longlegs\nRenegade Quara Pincher\nRhindeer\nRotspit\nSpitter\nTarantula\nThalas\nThe Bloodweb\nThe Hungerer\nThe Old Widow\nTremor Worm\nWerebear\nWerewolf\nZamulosh",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Unstable Ring of Ending",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/unstable_ring_of_ending.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.6,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "This item is not dropped by any creatures.",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Vampire's Signet Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/vampire_s_signet_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.1,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "The Pale Count",
+    "equipmentType": "rings"
+  },
+  {
+    "name": "Wedding Ring",
+    "image_url": "data:image/gif;base64,R0lGODlhAQABAIABAAAAAP///yH5BAEAAAEALAAAAAABAAEAQAICTAEAOw%3D%3D",
+    "local_image": "/equipment-png/rings/wedding_ring.png",
+    "header_2": "",
+    "arm": "",
+    "weight": 0.4,
+    "duration": "",
+    "charges": "",
+    "required_level": 0,
+    "required_vocation": "",
+    "vocation": "",
+    "dropped_by": "Banshee\nHero\nMemory of a Banshee\nVile Grandmaster\nMemory of a Hero",
+    "equipmentType": "rings"
   }
-
 ]

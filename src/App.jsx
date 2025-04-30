@@ -17,36 +17,36 @@ const DEFAULT_DAMAGE_PROFILE = {
 
 const BALANCED_WEIGHTS = {
   // Core combat skills
-  magic_level: 100,
-  distance_fighting: 100,
-  sword_fighting: 100,
-  axe_fighting: 100,
-  club_fighting: 100,
-  fist_fighting: 100,
+  magic_level: 1000, // was fine, but not dominant anymore
+  distance_fighting: 1000,
+  sword_fighting: 1000,
+  axe_fighting: 1000,
+  club_fighting: 1000,
+  fist_fighting: 1000,
 
-  // Elemental magic bonuses
-  fire_magic_level: 100,
-  energy_magic_level: 100,
-  earth_magic_level: 100,
-  ice_magic_level: 100,
-  death_magic_level: 100,
-  holy_magic_level: 100,
-  physical_magic_level: 100,
+  // Elemental magic bonuses (boosted significantly)
+  fire_magic_level: 200,
+  energy_magic_level: 200,
+  earth_magic_level: 180,
+  ice_magic_level: 180,
+  death_magic_level: 180,
+  holy_magic_level: 180,
+  physical_magic_level: 150,
 
   // Critical
-  critical_hit_chance: 20,
-  critical_extra_damage: 15,
+  critical_hit_chance: 25, // previously 20
+  critical_extra_damage: 20, // previously 15
 
   // Sustain
-  life_leech: 25,
-  mana_leech: 20,
+  life_leech: 10, // previously 100–120
+  mana_leech: 5, // previously 100–120
 
-  // Additional
+  // Special effects
+  augments: 200, // if still fallback to count-based
   buffs: 50,
-  augments: 50,
 
-  // Defensive factors in balanced
-  resistance: 2,
+  // Defensive contributions (light since it’s "balanced" mode)
+  resistance: 5,
 };
 
 export const calculateHitsTaken = (armor) => {
@@ -246,15 +246,6 @@ const App = () => {
         }
       }
 
-      setRankedEquipment(rankedByType);
-      setCurrentItemIndex(newCurrentItemIndex);
-
-      // ✅ Move this outside the filter loop — now ranking is complete
-      const bestSet = Object.entries(rankedByType).map(
-        ([type, items]) => items[0]
-      );
-      setBestGearSet(bestSet);
-
       return shouldInclude;
     });
 
@@ -269,63 +260,81 @@ const App = () => {
 
       if (calculationType === "defense") {
         const itemsWithScores = itemsOfType.map((item) => {
-          // First properly parse the armor value from wherever it might be
           const armor = parseFloat(
             item.stats?.Arm || item.arm || item.def || 0
           );
           const shield = parseFloat(item.shield || 0);
           const resistances = item.resistances || {};
-
-          // Simulate realistic reduction
-          let simulatedDamage = 0;
+          let totalMitigationScore = 0;
+          let totalIncomingDamage = totalDamage; // Start with the initial total damage
 
           for (const [damageType, incomingDamage] of Object.entries(
             damageTypes
           )) {
-            let reducedDamage = incomingDamage;
-
-            // Check for resistance in a more flexible way
-            let resistancePercent = 0;
             const damageTypeLower = damageType.toLowerCase();
+            let resistanceMultiplier = 1;
+            let resistancePercent = 0;
 
-            // Try different keys that might hold the resistance value
             if (resistances[damageTypeLower]) {
               resistancePercent =
                 parseFloat(resistances[damageTypeLower].replace("%", "")) || 0;
+              resistanceMultiplier -= resistancePercent / 100;
             } else if (resistances[damageTypeLower + "_resistance"]) {
               resistancePercent =
                 parseFloat(
                   resistances[damageTypeLower + "_resistance"].replace("%", "")
                 ) || 0;
+              resistanceMultiplier -= resistancePercent / 100;
             }
 
-            if (resistancePercent > 0) {
-              reducedDamage = Math.floor(
-                ((100 - resistancePercent) / 100) * reducedDamage
-              );
-            }
+            // Calculate damage after resistance
+            const damageAfterResistance = incomingDamage * resistanceMultiplier;
 
-            // Apply armor reduction after resistances
-            const minArmorReduction = Math.floor((armor + shield) / 2);
-            const maxArmorReduction = minArmorReduction * 2 - 1;
-            const avgArmorReduction = Math.floor(
-              (minArmorReduction + maxArmorReduction) / 2
+            // Apply armor reduction (you can adjust this formula)
+            const armorMitigation = Math.min(
+              armor + shield,
+              damageAfterResistance
+            ); // Example: Armor fully mitigates up to its value
+            const finalDamageTaken = Math.max(
+              0,
+              damageAfterResistance - armorMitigation
             );
-            const finalDamage = Math.max(0, reducedDamage - avgArmorReduction);
-            simulatedDamage += finalDamage;
+
+            // Calculate mitigation score for this damage type
+            const initialDamageForType = damageTypes[damageType] || 0;
+            const mitigatedAmount = initialDamageForType - finalDamageTaken;
+            const mitigationPercentage =
+              initialDamageForType > 0
+                ? (mitigatedAmount / initialDamageForType) * 100
+                : 0;
+
+            // Weight the mitigation score by the proportion of damage
+            const damageProportion = initialDamageForType / totalDamage;
+            totalMitigationScore += mitigationPercentage * damageProportion;
           }
 
-          // Use offensive stats as tiebreaker by adding a tiny fraction based on magic level or other offensive stats
-          let tiebreaker = 0;
-          if (item.attributes && Array.isArray(item.attributes)) {
-            for (const attr of item.attributes) {
-              if (attr.name === "magic_level") {
-                tiebreaker += parseFloat(attr.value) * 0.001; // Small enough to not override defense difference
-              }
-            }
+          // Add a bonus for relevant resistances (especially physical)
+          let relevantResistanceBonus = 0;
+          if (resistances.physical || resistances.physical_resistance) {
+            const physicalResist =
+              parseFloat(
+                (
+                  resistances.physical ||
+                  resistances.physical_resistance ||
+                  "0"
+                ).replace("%", "")
+              ) || 0;
+            relevantResistanceBonus += physicalResist * 200; // Adjust multiplier as needed
           }
 
-          return { ...item, score: -simulatedDamage + tiebreaker }; // Lower damage = better (higher score)
+          // Slightly reduce the direct impact of base armor in the score
+          const armorScore = (armor + shield) * 10; // Lower multiplier
+
+          return {
+            ...item,
+            score: totalMitigationScore + relevantResistanceBonus + armorScore,
+            // ... (other debug info if needed)
+          };
         });
 
         const sortedItems = itemsWithScores.sort((a, b) => b.score - a.score);
@@ -336,97 +345,156 @@ const App = () => {
           }
         }
       } else if (calculationType === "balanced") {
-        const getWeaponScore = (item) => {
-          const stats = item.stats || {};
-          const buffs = item.buffs || {};
-          const augments = item.augments || {};
-          const attributes = item.attributes || [];
-
-          // Step 1: Identify the relevant core skill
-          const type = item.equipmentType?.toLowerCase();
-          let relevantSkill = "magic_level"; // default fallback
-
-          if (["bows"].includes(type)) relevantSkill = "distance_fighting";
-          else if (["swords"].includes(type)) relevantSkill = "sword_fighting";
-          else if (["axes"].includes(type)) relevantSkill = "axe_fighting";
-          else if (["clubs"].includes(type)) relevantSkill = "club_fighting";
-          else if (["fist fighting"].includes(type))
-            relevantSkill = "fist_fighting";
-
-          const attrSkill = extractSkillBonus(attributes, relevantSkill);
-          const statSkill = parseFloat(stats[relevantSkill] || 0);
-          const mainSkillScore = attrSkill + statSkill;
-
-          // Step 2: Compute secondary bonus score
-          let secondaryScore = 0;
-
-          // Elemental bonuses
-          secondaryScore +=
-            extractSkillBonus(attributes, "fire_magic_level") * 75;
-          secondaryScore +=
-            extractSkillBonus(attributes, "energy_magic_level") * 75;
-
-          // Crit bonuses
-          const crit = extractCriticalHitBonus(attributes);
-          secondaryScore += crit.chance * 20;
-          secondaryScore += crit.damage * 15;
-
-          // Leech bonuses
-          secondaryScore += extractSkillBonus(attributes, "life_leech") * 25;
-          secondaryScore += extractSkillBonus(attributes, "mana_leech") * 20;
-
-          // Buffs & augments
-          secondaryScore += Object.keys(buffs).length * 50;
-          secondaryScore += Object.keys(augments).length * 50;
-
-          // Resistances (minimal weight)
-          for (const damageType in item.resistances || {}) {
-            const val =
-              parseFloat(item.resistances[damageType]?.replace("%", "")) || 0;
-            secondaryScore += val * 2;
-          }
-
-          // Step 3: Combine into a composite score that prioritizes core skill
-          return mainSkillScore * 10000 + secondaryScore;
-        };
-
-        const getGenericScore = (item) => {
+        // Enhanced implementation of getGenericScore that considers the damage profile
+        const getGenericScoreImproved = (item) => {
           let score = 0;
           const stats = item.stats || {};
-          const attributes = item.attributes || [];
-          const augments = item.augments || {};
+          const attrs = Array.isArray(item.attributes) ? item.attributes : [];
+          const resists = item.resistances || {};
+          const totalDmg = Object.values(damageTypes).reduce(
+            (a, b) => a + b,
+            0
+          );
 
-          // Base stats
-          score += parseFloat(stats.Arm || item.arm || item.def || 0) * 20;
-          score += parseFloat(stats.Atk || item.atk || 0) * 20;
+          // 1) Armor & shield
+          const armor = parseFloat(stats.Arm || item.arm || item.def || 0);
+          const shield = parseFloat(item.shield || 0);
+          score += armor * 10;
+          score += shield * 25;
 
-          // Extract skill bonuses from attributes properly
-          if (selectedVocation === "Sorcerer" || selectedVocation === "Druid") {
-            score += extractSkillBonus(attributes, "magic_level") * 100;
-          } else if (selectedVocation === "Paladin") {
-            score += extractSkillBonus(attributes, "distance_fighting") * 100;
-          } else if (selectedVocation === "Knight") {
-            score += extractSkillBonus(attributes, "sword_fighting") * 100;
-            score += extractSkillBonus(attributes, "axe_fighting") * 100;
-            score += extractSkillBonus(attributes, "club_fighting") * 100;
-            score += extractSkillBonus(attributes, "fist_fighting") * 100;
+          // 2) Resistances
+          for (const [type, dmg] of Object.entries(damageTypes)) {
+            const key = type.toLowerCase();
+            let pct = 0;
+            if (resists[key])
+              pct = parseFloat(resists[key].replace("%", "")) || 0;
+            else if (resists[key + "_resistance"])
+              pct =
+                parseFloat(resists[key + "_resistance"].replace("%", "")) || 0;
+            score += pct * (dmg / totalDmg) * 200;
           }
 
-          // Properly evaluate augments
-          Object.entries(augments || {}).forEach(([spellName, effect]) => {
-            const critMatch = effect.match(
-              /\+(\d+)%\s*critical\s*extra\s*damage/i
-            );
-            if (critMatch) {
-              score += parseInt(critMatch[1], 10) * 15; // Use the BALANCED_WEIGHTS.critical_extra_damage value
+          // 3) Mage skills (only Sorcerer/Druid)
+          if (["Sorcerer", "Druid"].includes(selectedVocation)) {
+            const ml = extractSkillBonus(attrs, "magic_level");
+            score += ml * BALANCED_WEIGHTS.magic_level;
+            for (const el of [
+              "fire",
+              "energy",
+              "earth",
+              "ice",
+              "death",
+              "holy",
+            ]) {
+              const eb = extractSkillBonus(attrs, `${el}_magic_level`);
+              const pct = (damageTypes[el] || 0) / totalDmg;
+              score +=
+                eb * BALANCED_WEIGHTS[`${el}_magic_level`] * (1 + pct / 25);
             }
-          });
+          }
 
-          // Add resistance scoring - make sure to handle all resistance types correctly
-          Object.entries(item.resistances || {}).forEach(([type, value]) => {
-            const numValue = parseFloat(value.replace("%", "")) || 0;
-            score += numValue * (BALANCED_WEIGHTS.resistance || 2);
-          });
+          // 4) Crit & leech
+          const crit = extractCriticalHitBonus(attrs);
+          score += crit.chance * BALANCED_WEIGHTS.critical_hit_chance;
+          score += crit.damage * BALANCED_WEIGHTS.critical_extra_damage;
+          score +=
+            extractSkillBonus(attrs, "life_leech") *
+            BALANCED_WEIGHTS.life_leech;
+          score +=
+            extractSkillBonus(attrs, "mana_leech") *
+            BALANCED_WEIGHTS.mana_leech;
+
+          // 5) Augments & buffs (count only)
+          score +=
+            (item.augments ? Object.keys(item.augments).length : 0) *
+            BALANCED_WEIGHTS.augments;
+          score +=
+            (item.buffs ? Object.keys(item.buffs).length : 0) *
+            BALANCED_WEIGHTS.buffs;
+
+          return score;
+        };
+
+        // Enhanced weapon scoring that considers the damage profile
+        const getWeaponScoreImproved = (item) => {
+          let score = 0;
+          const stats = item.stats || {};
+          const attrs = Array.isArray(item.attributes) ? item.attributes : [];
+          const resists = item.resistances || {};
+          const totalDmg = Object.values(damageTypes).reduce(
+            (a, b) => a + b,
+            0
+          );
+          const type = item.equipmentType?.toLowerCase();
+
+          // 1) Main skill (weighted at 800)
+          const skillMap = {
+            bows: "distance_fighting",
+            swords: "sword_fighting",
+            axes: "axe_fighting",
+            clubs: "club_fighting",
+            "fist fighting": "fist_fighting",
+          };
+          const mainSkill = skillMap[type] || "magic_level";
+          const bonus = extractSkillBonus(attrs, mainSkill);
+          const stat = parseFloat(stats[mainSkill] || 0);
+          score += (bonus + stat) * 800;
+
+          // 2) ATK: only for non–wand/rod weapons
+          if (!["wands", "rods"].includes(type)) {
+            const atk = parseFloat(stats.Atk || item.atk || 0) || 0;
+            score += atk * 20;
+          }
+
+          // 3) Resistances (light)
+          for (const [dt, dmg] of Object.entries(damageTypes)) {
+            const key = dt.toLowerCase();
+            let pct = 0;
+            if (resists[key])
+              pct = parseFloat(resists[key].replace("%", "")) || 0;
+            else if (resists[key + "_resistance"])
+              pct =
+                parseFloat(resists[key + "_resistance"].replace("%", "")) || 0;
+            score += pct * (dmg / totalDmg) * 2;
+          }
+
+          // 4) Elemental ML for wands/rods
+          if (
+            ["wands", "rods"].includes(type) &&
+            ["Sorcerer", "Druid"].includes(selectedVocation)
+          ) {
+            for (const el of [
+              "fire",
+              "energy",
+              "earth",
+              "ice",
+              "death",
+              "holy",
+            ]) {
+              const eb = extractSkillBonus(attrs, `${el}_magic_level`);
+              const pct = (damageTypes[el] || 0) / totalDmg;
+              score += eb * 200 * (1 + pct / 50);
+            }
+          }
+
+          // 5) Crit & leech
+          const crit = extractCriticalHitBonus(attrs);
+          score += crit.chance * BALANCED_WEIGHTS.critical_hit_chance;
+          score += crit.damage * BALANCED_WEIGHTS.critical_extra_damage;
+          score +=
+            extractSkillBonus(attrs, "life_leech") *
+            BALANCED_WEIGHTS.life_leech;
+          score +=
+            extractSkillBonus(attrs, "mana_leech") *
+            BALANCED_WEIGHTS.mana_leech;
+
+          // 6) Augments & buffs (count only)
+          score +=
+            (item.augments ? Object.keys(item.augments).length : 0) *
+            BALANCED_WEIGHTS.augments;
+          score +=
+            (item.buffs ? Object.keys(item.buffs).length : 0) *
+            BALANCED_WEIGHTS.buffs;
 
           return score;
         };
@@ -447,7 +515,9 @@ const App = () => {
 
           return {
             ...item,
-            score: isWeapon ? getWeaponScore(item) : getGenericScore(item),
+            score: isWeapon
+              ? getWeaponScoreImproved(item)
+              : getGenericScoreImproved(item),
           };
         });
 
@@ -471,8 +541,15 @@ const App = () => {
 
     setRankedEquipment(rankedByType);
     setCurrentItemIndex(newCurrentItemIndex);
+
+    // ✅ Move this outside the filter loop — now ranking is complete
+    const bestSet = Object.entries(rankedByType).map(
+      ([type, items]) => items[0]
+    );
+    setBestGearSet(bestSet);
   };
 
+  console.log("Ranked Equipment:", rankedEquipment);
   const handlePrevClick = (type) => {
     setCurrentItemIndex((prev) => ({
       ...prev,

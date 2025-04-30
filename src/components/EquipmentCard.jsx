@@ -25,7 +25,11 @@ const EquipmentCard = ({
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col h-full">
+    <div
+      className={`bg-gray-800 rounded-lg shadow-lg p-4 flex flex-col h-full ${
+        item.charges ? "border-2 border-purple-500" : ""
+      }`}
+    >
       <div className="flex justify-between items-center mb-3">
         <h3 className="text-lg font-semibold text-gray-200">
           {type.charAt(0).toUpperCase() + type.slice(1)}
